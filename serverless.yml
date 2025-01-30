@@ -1,0 +1,24 @@
+service: email-api
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: ap-south-1
+  timeout: 30  # Change to your desired region
+  profile: default  # Replace with your AWS profile name if using a custom profile
+
+functions:
+  sendEmail:
+    handler: handler.sendEmail
+    events:
+      - http:
+          path: send-email
+          method: post
+          cors: true
+
+plugins:
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    port: 3000  # Local server port
